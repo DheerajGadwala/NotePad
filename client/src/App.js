@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
-import SimpleStorageContract from "./contracts/SimpleStorage.json";
+import NotepadContract from "./contracts/Notepad.json";
 import getWeb3 from "./getWeb3";
 
 import "./App.css";
 
 
  const App = ()=>{
-    
+
     const [Web3, setWeb3] = useState(null);
     const [StorageValue, setStorageValue] = useState(0);
     const [Accounts, setAccounts] = useState(null);
@@ -14,28 +14,21 @@ import "./App.css";
 
     window.ethereum.on('accountsChanged', function (accounts) {
         setAccounts(Accounts);
-    })
-
-    const runExample = async ()=>{
-        if(Contract){
-            await Contract.methods.set(5).send({from: Accounts[0]});
-            const response = await Contract.methods.get().call();
-            setStorageValue(response);
-        }
-    }
+    });
 
     const setUp = async ()=>{
         try{
             let web3 = await getWeb3();
             let accounts = await web3.eth.getAccounts();
-            console.log(web3.eth.net.getId(), SimpleStorageContract);
+            console.log(web3.eth.net.getId(), NotepadContract);
             let instance = new web3.eth.Contract(
-                SimpleStorageContract.abi,
-                "0x53ABc339b67c390b7A11a8A1661Ebd79294E3E76",
+                NotepadContract.abi,
+                "0x91308822E77b1cF439C4AB5E30967598C5AA7FB2",
             );
             setWeb3(web3);
             setAccounts(accounts);
             setContract(instance);
+            console.log()
 
         }
         catch (error) {
@@ -46,29 +39,24 @@ import "./App.css";
           }
     }
 
+    const getData = async ()=>{
+        if(Contract){
+            //await Contract.methods.update("0xf17f52151ebef6c7334fad080c5704d77216b732", ["First Note"], ["Testing 1"]).send({from: Accounts[0]});
+            const response = await Contract.methods.fetch("0xf17f52151ebef6c7334fad080c5704d77216b732").call();
+            console.log(response)
+        }
+    }
+
     useEffect(() => {
         setUp();
     });
+
     useEffect(() =>{
-        runExample();
+        getData();
     }, [Contract]);
 
     return (
         <>
-        <div className="App">
-            <h1>Good to Go!</h1>
-            <p>Your Truffle Box is installed and ready.</p>
-            <h2>Smart Contract Example</h2>
-            <p>
-                If your contracts compiled and migrated successfully, below will show
-                a stored value of 5 (by default).
-            </p>
-            <p>
-                Try changing the value stored on <strong>line 40</strong> of App.js.
-            </p>
-            <div>The stored value is: {StorageValue}</div>
-            
-        </div>
         </>
     );
 }
