@@ -1,0 +1,48 @@
+.searchBarArea {
+  padding: 5px;
+}
+.searchBarBox {
+  min-width: 90%;
+  height: max(80px, 15vh);
+  background-color: #171717;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.iconContainer {
+  height: 30%;
+  width: 7%;
+  display: flex;
+  justify-content: center;
+  background-color: aliceblue;
+  border-color: aliceblue;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.searchIcon {
+  height: 100%;
+  left: 25%;
+}
+.searchBar {
+  width: 50%;
+  height: 30%;
+  padding: 0;
+  border: 0;
+  text-align: center;
+  border-color: aliceblue;
+  background-color: aliceblue;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.searchBar:focus {
+  outline: none;
+  border-top: solid 2px royalblue;
+  border-bottom: solid 2px royalblue;
+  border-left: solid 2px royalblue;
+}
+.searchBar:focus ~ .iconContainer {
+  border-top: solid 2px royalblue;
+  border-bottom: solid 2px royalblue;
+  border-right: solid 2px royalblue;
+}

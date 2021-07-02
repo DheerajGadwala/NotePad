@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import NotepadContract from "./contracts/Notepad.json";
 import getWeb3 from "./getWeb3";
+import SearchBar from "./components/searchBar";
+import Notes from "./components/notes";
 
 import "./App.css";
 
@@ -8,7 +10,6 @@ import "./App.css";
  const App = ()=>{
 
     const [Web3, setWeb3] = useState(null);
-    const [StorageValue, setStorageValue] = useState(0);
     const [Accounts, setAccounts] = useState(null);
     const [Contract, setContract] = useState(null);
 
@@ -56,8 +57,10 @@ import "./App.css";
     }, [Contract]);
 
     return (
-        <>
-        </>
+        <div className="notePadArea">
+            <SearchBar/>
+            <Notes/>
+        </div>
     );
 }
 
