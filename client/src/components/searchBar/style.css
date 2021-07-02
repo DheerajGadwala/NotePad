@@ -4,7 +4,7 @@
 .searchBarBox {
   min-width: 90%;
   height: max(80px, 15vh);
-  background-color: #171717;
+  background-color: rgb(19, 19, 19);
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -12,7 +12,7 @@
 }
 .iconContainer {
   height: 30%;
-  width: 7%;
+  width: 10%;
   display: flex;
   justify-content: center;
   background-color: aliceblue;
@@ -37,12 +37,12 @@
 }
 .searchBar:focus {
   outline: none;
-  border-top: solid 2px royalblue;
-  border-bottom: solid 2px royalblue;
-  border-left: solid 2px royalblue;
+  border-top: solid 3px royalblue;
+  border-bottom: solid 3px royalblue;
+  border-left: solid 3px royalblue;
 }
 .searchBar:focus ~ .iconContainer {
-  border-top: solid 2px royalblue;
-  border-bottom: solid 2px royalblue;
-  border-right: solid 2px royalblue;
+  border-top: solid 3px royalblue;
+  border-bottom: solid 3px royalblue;
+  border-right: solid 3px royalblue;
 }
