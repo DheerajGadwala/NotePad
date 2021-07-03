@@ -3,8 +3,8 @@
 }
 .searchBarBox {
   min-width: 90%;
-  height: max(80px, 15vh);
-  background-color: rgb(19, 19, 19);
+  height: 80px;
+  background-color: rgb(44, 44, 44);
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -45,4 +45,147 @@
   border-top: solid 3px royalblue;
   border-bottom: solid 3px royalblue;
   border-right: solid 3px royalblue;
+}
+.navigateUp {
+  transform: scale(0.5);
+  opacity: 0;
+  width: 40px;
+  height: 40px;
+  background-color: rgb(255, 45, 45);
+  border-radius: 50%;
+  position: fixed;
+  right: 30px;
+  bottom: 50px;
+}
+.navigateUpVisibility {
+  transform: scale(1);
+  opacity: 1;
+}
+@keyframes addNavigateUp {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes removeNavigateUp {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+}
+.navigateUpLeftBar {
+  width: 12px;
+  height: 2px;
+  left: 11px;
+  top: 18px;
+  transform: rotate(-60deg);
+  background-color: aliceblue;
+  position: absolute;
+}
+.navigateUpRightBar {
+  width: 12px;
+  height: 2px;
+  right: 11px;
+  top: 18px;
+  transform: rotate(60deg);
+  background-color: aliceblue;
+  position: absolute;
+}
+.navigateUp:hover {
+  cursor: pointer;
+}
+.addNote {
+  width: 40px;
+  height: 40px;
+  background-color: rgb(35, 104, 255);
+  border-radius: 50%;
+  position: fixed;
+  right: 30px;
+  bottom: 50px;
+}
+.addNotePosition {
+  right: 90px;
+}
+@keyframes addNoteMoveRight {
+  from {
+    right: 90px;
+  }
+  to {
+    right: 30px;
+  }
+}
+@keyframes addNoteMoveLeft {
+  from {
+    right: 30px;
+  }
+  to {
+    right: 90px;
+  }
+}
+.addNoteVerticalBar {
+  width: 15px;
+  height: 2px;
+  top: 19px;
+  left: 12.5px;
+  transform: rotate(90deg);
+  background-color: aliceblue;
+  position: absolute;
+}
+.addNoteHorizontalBar {
+  width: 15px;
+  height: 2px;
+  top: 19px;
+  left: 12.5px;
+  transform: rotate(0deg);
+  background-color: aliceblue;
+  position: absolute;
+}
+.addNote:hover {
+  cursor: pointer;
+}
+.save {
+  width: 40px;
+  height: 40px;
+  background-color: rgb(0, 209, 181);
+  border-radius: 50%;
+  position: fixed;
+  right: 90px;
+  bottom: 50px;
+}
+.savePosition {
+  right: 150px;
+}
+@keyframes saveMoveRight {
+  from {
+    right: 150px;
+  }
+  to {
+    right: 90px;
+  }
+}
+@keyframes saveMoveLeft {
+  from {
+    right: 90px;
+  }
+  to {
+    right: 150px;
+  }
+}
+.saveIcon {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  left: 7.5px;
+  top: 7.5px;
+}
+.save:hover {
+  cursor: pointer;
 }
