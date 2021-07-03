@@ -2,25 +2,28 @@ import React from 'react';
 import './style.css';
 import Note from './note';
 
-const Notes = ()=>{
+const Notes = (props)=>{
+
+    const ret = [];
+
+    let i=0;
+    while(i<props.data.length){
+        ret.push(
+            <Note
+            key = {i/3}
+            id = {i}
+            data = {props.data}
+            setData = {props.setData}
+            saveButton = {props.saveButton}
+            toggleSaveButton = {props.toggleSaveButton}
+            />
+        );
+        i+=3;
+    }
+
     return (
     <div className="notesArea">
-        <Note
-        title = "note 1"
-        content = "content 1"
-        />
-        <Note
-        title = "note 2"
-        content = "content 2"
-        />
-        <Note
-        title = "note 3"
-        content = "content 3"
-        />
-        <Note
-        title = "note 4"
-        content = "content 4"
-        />
+        {ret}
     </div>
     );
 }

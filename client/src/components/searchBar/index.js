@@ -3,7 +3,7 @@ import './style.css';
 import search from './images/search.png';
 import save from './images/save.png';
 
-const SearchBar = ()=>{
+const SearchBar = (props)=>{
 
     const searchBarRef = useRef(null);
     const navigateUpRef = useRef(null);
@@ -29,6 +29,33 @@ const SearchBar = ()=>{
         }
     }
 
+    const addNote = ()=>{
+        let data = [...props.data];
+        data.push("Title");
+        data.push("Notes");
+        data.push("0");
+        props.setData(data);
+    }
+
+    const saveData = async ()=>{
+        console.log("started", props.Contract);
+        if(props.Contract){
+            console.log("inside");
+            let titles = [];
+            let content = [];
+            let colours = [];
+            var i=0;
+            while(i<props.data.length){
+                titles.push(props.data[i++]);
+                content.push(props.data[i++]);
+                colours.push(props.data[i++]);
+            }
+            await props.Contract.methods.update("0xf17f52151ebef6c7334fad080c5704d77216b732", titles, content, colours).send({from: props.Accounts[0]});
+            
+        }
+        console.log("done");
+    }
+
     return (
     <>
         <div className="searchBarArea" ref={searchBarRef}>
@@ -44,14 +71,16 @@ const SearchBar = ()=>{
             </div>
             <div className="navigateUpRightBar">
             </div>
+            <div className="navigateUpBottomBar">
+            </div>
         </div>
-        <div className="addNote" ref={addNoteRef}>
+        <div className="addNote" ref={addNoteRef} onClick = {addNote}>
             <div className="addNoteVerticalBar">
             </div>
             <div className="addNoteHorizontalBar">
             </div>
         </div>
-        <div className="save" ref={saveRef}>
+        <div className="save" ref={saveRef} onClick = {saveData}>
             <img className="saveIcon" src={save}/>
         </div>
     </>

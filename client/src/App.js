@@ -13,6 +13,9 @@ import "./App.css";
     const [Accounts, setAccounts] = useState(null);
     const [Contract, setContract] = useState(null);
 
+    const [saveButton, toggleSaveButton] = useState(true);
+    const [data, setData] = useState([]);
+
     window.ethereum.on('accountsChanged', function (accounts) {
         setAccounts(Accounts);
     });
@@ -21,15 +24,13 @@ import "./App.css";
         try{
             let web3 = await getWeb3();
             let accounts = await web3.eth.getAccounts();
-            console.log(web3.eth.net.getId(), NotepadContract);
             let instance = new web3.eth.Contract(
                 NotepadContract.abi,
-                "0x91308822E77b1cF439C4AB5E30967598C5AA7FB2",
+                "0xb0f1390500973009582557f86aB9f1Fe612627AB",
             );
             setWeb3(web3);
             setAccounts(accounts);
             setContract(instance);
-            console.log()
 
         }
         catch (error) {
@@ -42,24 +43,38 @@ import "./App.css";
 
     const getData = async ()=>{
         if(Contract){
-            //await Contract.methods.update("0xf17f52151ebef6c7334fad080c5704d77216b732", ["First Note"], ["Testing 1"]).send({from: Accounts[0]});
+            //await Contract.methods.update("0xf17f52151ebef6c7334fad080c5704d77216b732", ["First Note", "Second Note"], ["Testing 1", "Testing 2"], ["1", "3"]).send({from: Accounts[0]});
             const response = await Contract.methods.fetch("0xf17f52151ebef6c7334fad080c5704d77216b732").call();
-            console.log(response)
+            setData(response);
         }
     }
 
     useEffect(() => {
         setUp();
-    });
-
+    }, [Web3, Accounts, Contract]);
     useEffect(() =>{
         getData();
     }, [Contract]);
+    useEffect(()=>{
+        console.log(data);
+    }, [data])
 
     return (
         <div className="notePadArea">
-            <SearchBar/>
-            <Notes/>
+            <SearchBar
+                data = {data}
+                setData = {setData}
+                saveButton = {saveButton}
+                toggleSaveButton = {toggleSaveButton}
+                Accounts = {Accounts}
+                Contract = {Contract}
+            />
+            <Notes
+                saveButton = {saveButton}
+                toggleSaveButton = {toggleSaveButton}
+                data = {data}
+                setData = {setData}
+            />
         </div>
     );
 }

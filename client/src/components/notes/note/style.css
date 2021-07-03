@@ -2,10 +2,21 @@
   width: max(38%, 400px);
   height: max(40vh, 300px);
   margin: 2% 5% 2% 5%;
-  background-color: darkgoldenrod;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.note[colour="0"] {
+  background-color: darkgoldenrod;
+}
+.note[colour="1"] {
+  background-color: cornflowerblue;
+}
+.note[colour="2"] {
+  background-color: chartreuse;
+}
+.note[colour="3"] {
+  background-color: crimson;
 }
 .bar {
   width: 80%;
@@ -25,11 +36,22 @@
   font-weight: 300;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 17px;
-  background-color: rgb(163, 122, 16);
   border: none;
   border-bottom: solid 1px black;
   width: 70%;
   height: 70%;
+}
+.titleInput[colour="0"] {
+  background-color: rgb(163, 122, 16);
+}
+.titleInput[colour="1"] {
+  background-color: rgb(40, 109, 236);
+}
+.titleInput[colour="2"] {
+  background-color: rgb(92, 184, 0);
+}
+.titleInput[colour="3"] {
+  background-color: rgb(177, 0, 35);
 }
 .titleInput:focus {
   outline: none;
@@ -53,6 +75,28 @@
   height: 70%;
   padding: 5px;
 }
+.contentInput[colour="0"] {
+  background-color: rgb(163, 122, 16);
+}
+.contentInput[colour="1"] {
+  background-color: rgb(40, 109, 236);
+}
+.contentInput[colour="2"] {
+  background-color: rgb(92, 184, 0);
+}
+.contentInput[colour="3"] {
+  background-color: rgb(177, 0, 35);
+}
 .contentInput:focus {
   outline: none;
+}
+.coloursImageContainer {
+  position: relative;
+  top: 20px;
+  left: 42%;
+  z-index: 1;
+}
+.coloursImage {
+  height: 30px;
+  width: 30px;
 }
