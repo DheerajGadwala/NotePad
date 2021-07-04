@@ -30,32 +30,36 @@ const SearchBar = (props)=>{
     }
 
     const addNote = ()=>{
-        let data = [...props.data];
-        data.push("Title");
-        data.push("Notes");
-        data.push("0");
-        props.setData(data);
+        if(!props.loading){
+            let data = [...props.data];
+            data.push("Title");
+            data.push("Notes");
+            data.push("0");
+            props.setData(data);
+            props.setChanges(true);
+        }
     }
 
     const saveData = async ()=>{
-        console.log("started", props.Contract);
-        if(props.Contract){
-            console.log("inside");
-            let titles = [];
-            let content = [];
-            let colours = [];
-            var i=0;
-            while(i<props.data.length){
-                titles.push(props.data[i++]);
-                content.push(props.data[i++]);
-                colours.push(props.data[i++]);
+        if(props.changes && !props.loading){
+            props.setLoading(true);
+            props.setChanges(false);
+            if(props.Contract){
+                let titles = [];
+                let content = [];
+                let colours = [];
+                var i=0;
+                while(i<props.data.length){
+                    titles.push(props.data[i++]);
+                    content.push(props.data[i++]);
+                    colours.push(props.data[i++]);
+                }
+                await props.Contract.methods.update(props.Accounts[0], titles, content, colours).send({from: props.Accounts[0]});
+                
             }
-            await props.Contract.methods.update("0xf17f52151ebef6c7334fad080c5704d77216b732", titles, content, colours).send({from: props.Accounts[0]});
-            
+            props.setLoading(false);
         }
-        console.log("done");
     }
-
     return (
     <>
         <div className="searchBarArea" ref={searchBarRef}>
@@ -74,13 +78,13 @@ const SearchBar = (props)=>{
             <div className="navigateUpBottomBar">
             </div>
         </div>
-        <div className="addNote" ref={addNoteRef} onClick = {addNote}>
+        <div className={props.loading?window.pageYOffset>85?"addNote addNotePosition disabled":"addNote disabled":window.pageYOffset>85?"addNote addNotePosition":"addNote"} ref={addNoteRef} onClick = {addNote}>
             <div className="addNoteVerticalBar">
             </div>
             <div className="addNoteHorizontalBar">
             </div>
         </div>
-        <div className="save" ref={saveRef} onClick = {saveData}>
+        <div className={props.changes?window.pageYOffset>85?"save savePosition":"save":window.pageYOffset>85?"save noChanges savePosition":"save noChanges"} ref={saveRef} onClick = {saveData}>
             <img className="saveIcon" src={save}/>
         </div>
     </>

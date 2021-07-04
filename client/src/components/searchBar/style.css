@@ -111,6 +111,7 @@
 }
 .navigateUp:hover {
   cursor: pointer;
+  background-color: rgb(255, 81, 81);
 }
 .addNote {
   width: 40px;
@@ -121,6 +122,10 @@
   z-index: 2;
   right: 30px;
   bottom: 50px;
+}
+.disabled {
+  background-color: rgb(18, 60, 150);
+  box-shadow: 0 0 2px 2px rgb(18, 60, 150);
 }
 .addNotePosition {
   right: 90px;
@@ -161,6 +166,12 @@
 }
 .addNote:hover {
   cursor: pointer;
+  background-color: rgb(62, 123, 255);
+}
+.disabled:hover {
+  cursor: not-allowed;
+  background-color: rgb(18, 60, 150);
+  box-shadow: 0 0 2px 2px rgb(18, 60, 150);
 }
 .save {
   width: 40px;
@@ -171,6 +182,10 @@
   z-index: 2;
   right: 90px;
   bottom: 50px;
+}
+.noChanges {
+  background-color: rgb(0, 102, 88);
+  box-shadow: 0 0 2px 2px rgb(0, 102, 88);
 }
 .savePosition {
   right: 150px;
@@ -200,4 +215,9 @@
 }
 .save:hover {
   cursor: pointer;
+  background-color: rgb(59, 218, 196);
+}
+.noChanges:hover {
+  cursor: not-allowed;
+  background-color: rgb(0, 102, 88);
 }

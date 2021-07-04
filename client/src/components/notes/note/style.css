@@ -7,7 +7,7 @@
   align-items: center;
 }
 .note[colour="0"] {
-  background-color: darkgoldenrod;
+  background-color: rgb(231, 247, 17);
 }
 .note[colour="1"] {
   background-color: cornflowerblue;
@@ -42,7 +42,7 @@
   height: 70%;
 }
 .titleInput[colour="0"] {
-  background-color: rgb(163, 122, 16);
+  background-color: rgb(179, 190, 17);
 }
 .titleInput[colour="1"] {
   background-color: rgb(40, 109, 236);
@@ -76,7 +76,7 @@
   padding: 5px;
 }
 .contentInput[colour="0"] {
-  background-color: rgb(163, 122, 16);
+  background-color: rgb(179, 190, 17);
 }
 .contentInput[colour="1"] {
   background-color: rgb(40, 109, 236);
@@ -99,4 +99,31 @@
 .coloursImage {
   height: 30px;
   width: 30px;
+  transform: scale(1);
+  transition: transform 0.5s;
+}
+.coloursImage:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  transition: transform 0.5s;
+}
+.deleteImageContainer {
+  position: relative;
+  top: -15px;
+  right: 42%;
+  z-index: 1;
+}
+.deleteImage {
+  height: 30px;
+  width: 30px;
+  transform: scale(1);
+  transition: transform 0.5s;
+}
+.deleteImage:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  transition: transform 0.5s;
+}
+.loadingEnabledImages:hover {
+  cursor: not-allowed;
 }
