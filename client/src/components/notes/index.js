@@ -24,7 +24,6 @@ const Notes = (props)=>{
         }
         setRet(ret);
     }, [props]);
-    
 
     return (
     <div className="notesArea">
