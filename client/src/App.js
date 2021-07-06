@@ -17,6 +17,9 @@ import "./App.css";
     const [changes, setChanges] = useState(false);
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
+    const [searchFilterData, setSearchFilterData] = useState("All");
+    const [colorsFilterData, setColorsFilterData] = useState([true, true, true, true, true]);
+    const [searchData, setSearchData] = useState("");
 
     window.ethereum.on('accountsChanged', function (accounts) {
         setAccounts(accounts);
@@ -75,6 +78,12 @@ import "./App.css";
                 Contract = {Contract}
                 changes = {changes}
                 setChanges = {setChanges}
+                searchFilterData = {searchFilterData}
+                setSearchFilterData = {setSearchFilterData}
+                colorsFilterData = {colorsFilterData}
+                setColorsFilterData = {setColorsFilterData}
+                searchData = {searchData}
+                setSearchData = {setSearchData}
             />
             <Notes
                 loading = {loading}

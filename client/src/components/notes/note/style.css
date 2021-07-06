@@ -26,6 +26,9 @@
 .note[colour="3"] {
   background-color: crimson;
 }
+.note[colour="4"] {
+  background-color: rgb(226, 226, 226);
+}
 .bar {
   width: 70%;
   height: 2px;
@@ -61,6 +64,9 @@
 .titleInput[colour="3"] {
   background-color: rgb(177, 0, 35);
 }
+.titleInput[colour="4"] {
+  background-color: rgb(126, 126, 126);
+}
 .titleInput:focus {
   outline: none;
 }
@@ -95,6 +101,9 @@
 .contentInput[colour="3"] {
   background-color: rgb(177, 0, 35);
 }
+.contentInput[colour="4"] {
+  background-color: rgb(126, 126, 126);
+}
 .contentInput:focus {
   outline: none;
 }
@@ -116,6 +125,10 @@
   transform: scale(1.2);
   transition: transform 0.5s;
 }
+.coloursImage:active {
+  transform: scale(0.9);
+  transition: transform 0.5s;
+}
 .deleteImage {
   height: 30px;
   width: 30px;
@@ -125,6 +138,10 @@
 .deleteImage:hover {
   cursor: pointer;
   transform: scale(1.2);
+  transition: transform 0.5s;
+}
+.deleteImage:active {
+  transform: scale(0.9);
   transition: transform 0.5s;
 }
 .leftImage {
@@ -138,6 +155,10 @@
   transform: scale(1.2);
   transition: transform 0.5s;
 }
+.leftImage:active {
+  transform: scale(0.9);
+  transition: transform 0.5s;
+}
 .rightImage {
   height: 30px;
   width: 30px;
@@ -147,6 +168,10 @@
 .rightImage:hover {
   cursor: pointer;
   transform: scale(1.2);
+  transition: transform 0.5s;
+}
+.rightImage:active {
+  transform: scale(0.9);
   transition: transform 0.5s;
 }
 .loadingEnabledImages:hover {

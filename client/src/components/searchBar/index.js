@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import './style.css';
 import search from './images/search.png';
 import save from './images/save.png';
@@ -9,6 +9,21 @@ const SearchBar = (props)=>{
     const navigateUpRef = useRef(null);
     const addNoteRef = useRef(null);
     const saveRef = useRef(null);
+
+    const [dropDownOpen, setDropDownOpen] = useState(false);
+
+    document.onclick = (e)=>{
+        if( !
+            (   e.target.classList.contains("option")
+                ||
+                e.target.classList.contains("dropDownArrowContainer")
+                ||
+                e.target.classList.contains("searchByFilter")
+            )
+            &&
+            dropDownOpen)
+            dropDownToggle();
+    }
 
     window.onscroll = ()=>{
         if(!navigateUpRef.current.classList.contains("navigateUpVisibility") && window.pageYOffset >= 85){
@@ -60,13 +75,84 @@ const SearchBar = (props)=>{
             props.setLoading(false);
         }
     }
+
+    const dropDownToggle = ()=>{
+        var o1 = document.getElementById("option1");
+        var o2 = document.getElementById("option2");
+        var o3 = document.getElementById("option3");
+        if(!o1.classList.contains("option1")){
+            o1.style.animation = "option1OpenAnimate 0.5s ease-in";
+            o2.style.animation = "option2OpenAnimate 0.5s ease-in";
+            o3.style.animation = "option3OpenAnimate 0.5s ease-in";
+            document.getElementById("option1").classList.toggle('option1');
+            document.getElementById("option2").classList.toggle('option2');
+            document.getElementById("option3").classList.toggle('option3');
+            setDropDownOpen(true);
+        }
+        else{
+            o1.style.animation = "option1CloseAnimate 0.5s ease-in";
+            o2.style.animation = "option2CloseAnimate 0.5s ease-in";
+            o3.style.animation = "option3CloseAnimate 0.5s ease-in";
+            document.getElementById("option1").classList.toggle('option1');
+            document.getElementById("option2").classList.toggle('option2');
+            document.getElementById("option3").classList.toggle('option3');
+            setDropDownOpen(false);
+        }
+    }
+
+    const setColours = (e)=>{
+        const id = parseInt(e.target.id[e.target.id.length-1]);
+        const tempTargetClassList = e.target.classList;
+        const tempColorData = [...props.colorsFilterData];
+        tempColorData[id] = !tempColorData[id];
+        tempTargetClassList.toggle("notSelected");
+        props.setColorsFilterData(tempColorData);
+    }
+
     return (
     <>
         <div className="searchBarArea" ref={searchBarRef}>
-            <div className="searchBarBox">
-                <input className="searchBar" placeholder="Search" type="text"/>
-                <div className="iconContainer">
-                    <img className="searchIcon" src={search}/>
+            <div className="searchBarAndFiltersContainer">
+                <div className = "searchByFilterContainer">
+                    <div className = "searchByFilter" onClick={dropDownToggle}>
+                        Filter : {props.searchFilterData}
+                    </div>
+                    <div className = "dropDownArrowContainer" onClick={dropDownToggle}>
+                        <div className="bar1 hov"></div>
+                        <div className="bar2 hov"></div>
+                        <div className="bar3 hov"></div>
+                    </div>
+                    <div className="option" id="option1" onClick={()=>{props.setSearchFilterData("Any"); dropDownToggle();}}>All</div>
+                    <div className="option" id="option2" onClick={()=>{props.setSearchFilterData("Titles"); dropDownToggle();}}>Title</div>
+                    <div className="option" id="option3" onClick={()=>{props.setSearchFilterData("Content"); dropDownToggle();}}>Content</div>
+                </div>
+                <div className="searchBarBox">
+                    <input className="searchBar" id="searchBar" placeholder="Search" type="text" onChange={(e)=>{props.setSearchData(e.target.value);}}/>
+                    <div className="iconContainer" onClick={()=>{document.querySelector("#searchBar").focus()}}>
+                        <img className="searchIcon" src={search}/>
+                    </div>
+                </div>
+                <div className="colorBoxes">
+                    <div className="colorBox" onClick={setColours} id="c0">
+                        <div className="left"></div>
+                        <div className="right"></div>
+                    </div>
+                    <div className="colorBox" onClick={setColours} id="c1">
+                        <div className="left"></div>
+                        <div className="right"></div>
+                    </div>
+                    <div className="colorBox" onClick={setColours} id="c2">
+                        <div className="left"></div>
+                        <div className="right"></div>
+                    </div>
+                    <div className="colorBox" onClick={setColours} id="c3">
+                        <div className="left"></div>
+                        <div className="right"></div>
+                    </div>
+                    <div className="colorBox" onClick={setColours} id="c4">
+                        <div className="left"></div>
+                        <div className="right"></div>
+                    </div>
                 </div>
             </div>
         </div>

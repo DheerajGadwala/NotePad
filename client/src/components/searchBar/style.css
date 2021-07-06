@@ -1,39 +1,248 @@
 .searchBarArea {
   padding: 5px;
 }
-.searchBarBox {
+.searchBarAndFiltersContainer {
   min-width: 90%;
-  height: 80px;
   background-color: rgb(44, 44, 44);
   border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+.searchByFilterContainer {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px 0 10px;
+}
+.searchByFilter {
+  min-width: 200px;
+  height: 30%;
+  background-color: aliceblue;
+  padding: 3px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top: solid 3px rgb(44, 44, 44);
+  border-bottom: solid 3px rgb(44, 44, 44);
+  border-left: solid 3px rgb(44, 44, 44);
   display: flex;
   align-items: center;
   justify-content: center;
 }
+.dropDownArrowContainer {
+  min-width: 30px;
+  height: 30%;
+  background-color: aliceblue;
+  padding: 3px;
+  border-top: solid 3px rgb(44, 44, 44);
+  border-bottom: solid 3px rgb(44, 44, 44);
+  border-right: solid 3px rgb(44, 44, 44);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.bar1 {
+  height: 7.5px;
+  width: 1.5px;
+  background-color: black;
+  position: relative;
+  top: 10px;
+  left: 16.5px;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+.bar2 {
+  height: 7.5px;
+  width: 1.5px;
+  background-color: black;
+  position: relative;
+  top: 2px;
+  left: 12px;
+  transform: rotate(-45deg);
+  pointer-events: none;
+}
+.bar3 {
+  height: 10px;
+  width: 1.5px;
+  background-color: black;
+  position: relative;
+  top: -9px;
+  left: 15px;
+  transform: rotate(90deg);
+  pointer-events: none;
+}
+.searchByFilter:hover {
+  background-color: rgb(29, 29, 29);
+  cursor: pointer;
+  color: white;
+}
+.dropDownArrowContainer:hover {
+  background-color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+.dropDownArrowContainer:hover > .hov {
+  background-color: rgb(248, 248, 248);
+}
+.searchByFilter:hover ~ .dropDownArrowContainer {
+  background-color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+.searchByFilter:hover ~ .dropDownArrowContainer > .hov {
+  background-color: rgb(248, 248, 248);
+}
+.option {
+  min-width: 230px;
+  height: 24px;
+  background-color: aliceblue;
+  padding: 2px;
+  border-radius: 5px;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  top: 30px;
+  display: flex;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 4;
+}
+.option:hover {
+  background-color: rgb(29, 29, 29);
+  color: rgb(255, 255, 255);
+}
+.option1 {
+  display: flex;
+  top: 65px;
+  opacity: 0.9;
+  pointer-events: all;
+}
+.option2 {
+  display: flex;
+  top: 98px;
+  opacity: 0.9;
+  pointer-events: all;
+}
+.option3 {
+  display: flex;
+  top: 131px;
+  opacity: 0.9;
+  pointer-events: all;
+}
+@keyframes option1OpenAnimate {
+  from {
+    display: none;
+    top: 30px;
+    opacity: 0;
+  }
+  to {
+    display: flex;
+    top: 65px;
+    opacity: 0.9;
+  }
+}
+@keyframes option2OpenAnimate {
+  from {
+    display: none;
+    top: 30px;
+    opacity: 0;
+  }
+  to {
+    display: flex;
+    top: 98px;
+    opacity: 1;
+  }
+}
+@keyframes option3OpenAnimate {
+  from {
+    display: none;
+    top: 30px;
+    opacity: 0;
+  }
+  to {
+    display: flex;
+    top: 131px;
+    opacity: 1;
+  }
+}
+@keyframes option1CloseAnimate {
+  from {
+    display: flex;
+    top: 65px;
+    opacity: 1;
+  }
+  to {
+    display: none;
+    top: 30px;
+    opacity: 0;
+  }
+}
+@keyframes option2CloseAnimate {
+  from {
+    display: flex;
+    top: 98px;
+    opacity: 1;
+  }
+  to {
+    display: none;
+    top: 30px;
+    opacity: 0;
+  }
+}
+@keyframes option3CloseAnimate {
+  from {
+    display: flex;
+    top: 131px;
+    opacity: 1;
+  }
+  to {
+    display: none;
+    top: 30px;
+    opacity: 0;
+  }
+}
+.searchBarBox {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px 0 10px;
+}
 .iconContainer {
   height: 30%;
-  width: 10%;
+  padding: 3px;
   display: flex;
   justify-content: center;
   background-color: aliceblue;
   border-color: aliceblue;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  border-top: solid 3px rgb(44, 44, 44);
+  border-bottom: solid 3px rgb(44, 44, 44);
+  border-right: solid 3px rgb(44, 44, 44);
+}
+.iconContainer:hover {
+  cursor: text;
 }
 .searchIcon {
   height: 100%;
   left: 25%;
 }
 .searchBar {
-  width: 50%;
+  min-width: 250px;
   height: 30%;
-  padding: 0;
+  padding: 3px;
   border: 0;
   text-align: center;
   border-color: aliceblue;
   background-color: aliceblue;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+  border-top: solid 3px rgb(44, 44, 44);
+  border-bottom: solid 3px rgb(44, 44, 44);
+  border-left: solid 3px rgb(44, 44, 44);
 }
 .searchBar:focus {
   outline: none;
@@ -45,6 +254,72 @@
   border-top: solid 3px royalblue;
   border-bottom: solid 3px royalblue;
   border-right: solid 3px royalblue;
+}
+.colorBoxes {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 10px 0 10px;
+}
+.colorBox {
+  height: 30%;
+  width: 30px;
+  margin: 3px;
+  border-radius: 5px;
+}
+.colorBox:hover {
+  cursor: pointer;
+}
+.notSelected > .left {
+  height: 25px;
+  width: 2.5px;
+  background-color: rgb(17, 17, 17);
+  position: relative;
+  left: 14px;
+  top: 0px;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+.notSelected > .right {
+  height: 25px;
+  width: 2.5px;
+  background-color: rgb(17, 17, 17);
+  position: relative;
+  left: 14px;
+  top: -25px;
+  transform: rotate(-45deg);
+  pointer-events: none;
+}
+#c0 {
+  background-color: rgb(231, 247, 17);
+}
+#c1 {
+  background-color: cornflowerblue;
+}
+#c2 {
+  background-color: chartreuse;
+}
+#c3 {
+  background-color: crimson;
+}
+#c4 {
+  background-color: rgb(214, 214, 214);
+}
+#c0:hover {
+  background-color: rgb(246, 255, 117);
+}
+#c1:hover {
+  background-color: rgb(165, 190, 236);
+}
+#c2:hover {
+  background-color: rgb(194, 255, 133);
+}
+#c3:hover {
+  background-color: rgb(216, 98, 122);
+}
+#c4:hover {
+  background-color: rgb(255, 255, 255);
 }
 .navigateUp {
   transform: scale(0.5);

@@ -47,9 +47,9 @@ const Note = (props)=>{
     const colourChange = ()=>{
         if(!props.loading){
             props.setChanges(true);
-            setColour((colour+1)%4);
+            setColour((colour+1)%5);
             let data = [...props.data];
-            data[props.id+2] = ""+(colour+1)%4;
+            data[props.id+2] = ""+(colour+1)%5;
             props.setData(data);
         }
     }
@@ -64,18 +64,30 @@ const Note = (props)=>{
             props.setData(data);
         }
     }
+
+    function easeOut (time, targetX) {
+        time /= 500;
+        if (time < 1)  {
+             return targetX / 2 * time * time;
+        }
+   
+        time--;
+        return -targetX/ 2 * (time * (time - 2) - 1);
+    };
+
     const move = (obj, targetX, targetY)=>{
         return new Promise((resolve)=>{
             var left = 0;
             var top = 0;
-            var frameRate = 100;
+            var cnt = 0;
             var id = setInterval(()=>{
                 if(Math.round(left)!=targetX)
-                    left+=targetX/frameRate;
-                if(Math.round(top)!=targetY)
-                    top+=targetY/frameRate;
+                    left = targetX*((cnt*cnt)/(2*(cnt*cnt-cnt)+1)); // https://stackoverflow.com/questions/13462001/ease-in-and-ease-out-animation-formula
+                if(Math.round(top)!=targetY)                        //parametric function from Creak's answer => sqt/(2*(sqt-t)+1) where sqt = t^2;
+                    top = targetY*((cnt*cnt)/(2*(cnt*cnt-cnt)+1));
                 obj.style.left = left + 'px';
                 obj.style.top = top + 'px';
+                cnt+=0.005;
                 if((Math.round(left)==targetX)&&(Math.round(top)==targetY)){
                         clearInterval(id);
                         resolve();
