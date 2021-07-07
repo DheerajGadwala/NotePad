@@ -15,15 +15,13 @@ import "./App.css";
     const [Contract, setContract] = useState(null);
 
     const [changes, setChanges] = useState(false);
+    const [noChangesOnBlur, setNoChangesOnBlur] = useState(false);
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const [searchFilterData, setSearchFilterData] = useState("All");
     const [colorsFilterData, setColorsFilterData] = useState([true, true, true, true, true]);
     const [searchData, setSearchData] = useState("");
-
-    window.ethereum.on('accountsChanged', function (accounts) {
-        setAccounts(accounts);
-    });
+    const [displayIDs, setDisplayIDs] = useState([]);
 
     const setUp = async ()=>{
         try{
@@ -47,7 +45,11 @@ import "./App.css";
             console.error(error);
           }
     }
-
+    useEffect(()=>{
+        window.ethereum.on('accountsChanged', function (accounts) {
+            setAccounts(accounts);
+        });
+    }, []);
     const getData = async ()=>{
         setLoading(true);
         if(Contract && Accounts){
@@ -56,7 +58,6 @@ import "./App.css";
         }
         setLoading(false);
     }
-
     useEffect(() => {
         setUp();
     }, [Web3, Accounts, Contract]);
@@ -84,13 +85,25 @@ import "./App.css";
                 setColorsFilterData = {setColorsFilterData}
                 searchData = {searchData}
                 setSearchData = {setSearchData}
+                displayIDs = {displayIDs}
+                setDisplayIDs = {setDisplayIDs}
+                noChangesOnBlur = {noChangesOnBlur}
+                setNoChangesOnBlur = {setNoChangesOnBlur}
             />
             <Notes
                 loading = {loading}
                 setLoading = {setLoading}
                 data = {data}
                 setData = {setData}
+                changes = {changes}
                 setChanges = {setChanges}
+                searchFilterData = {searchFilterData}
+                colorsFilterData = {colorsFilterData}
+                searchData = {searchData}
+                displayIDs = {displayIDs}
+                setDisplayIDs = {setDisplayIDs}
+                noChangesOnBlur = {noChangesOnBlur}
+                setNoChangesOnBlur = {setNoChangesOnBlur}
             />
         </div>
     );

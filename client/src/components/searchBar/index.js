@@ -109,6 +109,56 @@ const SearchBar = (props)=>{
         props.setColorsFilterData(tempColorData);
     }
 
+    const checkSearchValue = (val)=>{
+        return val.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
+    }
+    const highlight = ()=>{
+        props.setSearchData(document.querySelector("#searchBar").value);
+        let searchValue = document.querySelector("#searchBar").value.trim();
+        let searchValueWithEscapes = checkSearchValue(searchValue);
+        if(searchValue!==""){
+            document.querySelectorAll(".note").forEach(note=>{
+                let id = parseInt(note.id);
+                let title = document.querySelector("#titleInput"+id);
+                let content = document.querySelector("#contentInput"+id);
+                let reTitle = new RegExp(searchValueWithEscapes+"+(?![^<]*>)+(?![^&]*b*s*p*;)", "gi");
+                let reContent = new RegExp(searchValueWithEscapes+"+(?![^<]*>)+(?![^&]*b*s*p*;)", "g");
+                let stateTitle = props.data[id];
+                let stateContent = props.data[id+1];
+                let highlightedTitle, highlightedContent;
+                if(props.searchFilterData==="All"){
+                    highlightedTitle = stateTitle.replace(reTitle, `<mark>${searchValue}</mark>`);
+                    highlightedContent = stateContent.replace(reContent, `<mark>${searchValue}</mark>`);
+                    title.innerHTML = highlightedTitle;
+                    content.innerHTML = highlightedContent;
+
+                }
+                else if(props.searchFilterData==="Titles"){
+                    highlightedTitle = stateTitle.replace(reTitle, `<mark>${searchValue}</mark>`);
+                    title.innerHTML = highlightedTitle;
+                    document.querySelector("#contentInput"+id).innerHTML = props.data[id+1];
+                }
+                else if(props.searchFilterData==="Content"){
+                    highlightedContent = stateContent.replace(reContent, `<mark>${searchValue}</mark>`);
+                    content.innerHTML = highlightedContent;
+                    document.querySelector("#titleInput"+id).innerHTML = props.data[id];
+                }
+            });
+        }
+        else{
+            document.querySelectorAll(".note").forEach(note=>{
+                let id = parseInt(note.id);
+                document.querySelector("#titleInput"+id).innerHTML = props.data[id];
+                document.querySelector("#contentInput"+id).innerHTML = props.data[id+1];
+            });
+        }
+    }
+
+    useEffect(()=>{
+        highlight();
+        props.setNoChangesOnBlur(false);
+    }, [props]);
+
     return (
     <>
         <div className="searchBarArea" ref={searchBarRef}>
@@ -122,12 +172,12 @@ const SearchBar = (props)=>{
                         <div className="bar2 hov"></div>
                         <div className="bar3 hov"></div>
                     </div>
-                    <div className="option" id="option1" onClick={()=>{props.setSearchFilterData("Any"); dropDownToggle();}}>All</div>
-                    <div className="option" id="option2" onClick={()=>{props.setSearchFilterData("Titles"); dropDownToggle();}}>Title</div>
+                    <div className="option" id="option1" onClick={()=>{props.setSearchFilterData("All"); dropDownToggle();}}>All</div>
+                    <div className="option" id="option2" onClick={()=>{props.setSearchFilterData("Titles"); dropDownToggle();}}>Titles</div>
                     <div className="option" id="option3" onClick={()=>{props.setSearchFilterData("Content"); dropDownToggle();}}>Content</div>
                 </div>
                 <div className="searchBarBox">
-                    <input className="searchBar" id="searchBar" placeholder="Search" type="text" onChange={(e)=>{props.setSearchData(e.target.value);}}/>
+                    <input className="searchBar" id="searchBar" placeholder="Search" type="text" onChange={highlight}/>
                     <div className="iconContainer" onClick={()=>{document.querySelector("#searchBar").focus()}}>
                         <img className="searchIcon" src={search}/>
                     </div>
