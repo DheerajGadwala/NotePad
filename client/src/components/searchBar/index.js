@@ -11,6 +11,7 @@ const SearchBar = (props)=>{
     const saveRef = useRef(null);
 
     const [dropDownOpen, setDropDownOpen] = useState(false);
+    const [saveFailed, setSaveFailed] = useState(false);
 
     document.onclick = (e)=>{
         if( !
@@ -59,20 +60,27 @@ const SearchBar = (props)=>{
         if(props.changes && !props.loading){
             props.setLoading(true);
             props.setChanges(false);
-            if(props.Contract){
-                let titles = [];
-                let content = [];
-                let colours = [];
-                var i=0;
-                while(i<props.data.length){
-                    titles.push(props.data[i++]);
-                    content.push(props.data[i++]);
-                    colours.push(props.data[i++]);
+            try{
+                if(props.Contract){
+                    let titles = [];
+                    let content = [];
+                    let colours = [];
+                    var i=0;
+                    while(i<props.data.length){
+                        titles.push(props.data[i++]);
+                        content.push(props.data[i++]);
+                        colours.push(props.data[i++]);
+                    }
+                    await props.Contract.methods.update(props.Accounts[0], titles, content, colours).send({from: props.Accounts[0]});
                 }
-                await props.Contract.methods.update(props.Accounts[0], titles, content, colours).send({from: props.Accounts[0]});
-                
+                props.setLoading(false);
             }
-            props.setLoading(false);
+            catch(error){
+                console.log('Transaction declined by user');
+                props.setChanges(true);
+                props.setLoading(false);
+                setSaveFailed(true);
+            }
         }
     }
 
@@ -121,14 +129,14 @@ const SearchBar = (props)=>{
                 let id = parseInt(note.id);
                 let title = document.querySelector("#titleInput"+id);
                 let content = document.querySelector("#contentInput"+id);
-                let reTitle = new RegExp(searchValueWithEscapes+"+(?![^<]*>)+(?![^&]*b*s*p*;)", "gi");
-                let reContent = new RegExp(searchValueWithEscapes+"+(?![^<]*>)+(?![^&]*b*s*p*;)", "g");
+                let reTitle = new RegExp(`(${searchValueWithEscapes})+(?![^<]*>)+(?![^&]*b*s*p*;)`, "gi");
+                let reContent = new RegExp(`(${searchValueWithEscapes})+(?![^<]*>)+(?![^&]*b*s*p*;)`, "g");
                 let stateTitle = props.data[id];
                 let stateContent = props.data[id+1];
                 let highlightedTitle, highlightedContent;
                 if(props.searchFilterData==="All"){
-                    highlightedTitle = stateTitle.replace(reTitle, `<mark>${searchValue}</mark>`);
-                    highlightedContent = stateContent.replace(reContent, `<mark>${searchValue}</mark>`);
+                    highlightedTitle = stateTitle.replaceAll(reTitle, `<mark>${searchValue}</mark>`);
+                    highlightedContent = stateContent.replaceAll(reContent, `<mark>${searchValue}</mark>`);
                     title.innerHTML = highlightedTitle;
                     content.innerHTML = highlightedContent;
 
@@ -222,6 +230,18 @@ const SearchBar = (props)=>{
         </div>
         <div className={props.changes?window.pageYOffset>85?"save savePosition":"save":window.pageYOffset>85?"save noChanges savePosition":"save noChanges"} ref={saveRef} onClick = {saveData}>
             <img className="saveIcon" src={save}/>
+        </div>
+        <div className={saveFailed?"saveFailedBox visible":"saveFailedBox"}>
+            <div className="saveFailedContainer">
+                <div className="saveFailedText">
+                    Either you do not have sufficient funds or you have rejected the transaction.
+                </div>
+                <div className="saveFailedOKButton" onClick={()=>{setSaveFailed(false)}}>
+                    <div>
+                        OK
+                    </div>
+                </div>
+            </div>
         </div>
     </>
     );

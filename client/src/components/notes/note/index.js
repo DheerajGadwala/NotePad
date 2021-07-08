@@ -133,7 +133,6 @@ const Note = (props)=>{
                 // document.querySelector("#titleInput"+rightNote).innerHTML = data[rightNote];
                 // document.querySelector("#contentInput"+(props.id)).innerHTML = data[props.id+1];
                 // document.querySelector("#contentInput"+(rightNote)).innerHTML = data[rightNote+1];
-                
                 divA.style.top=0;
                 divA.style.left=0;
                 divB.style.top=0;
@@ -203,13 +202,13 @@ const Note = (props)=>{
         </div>
         <div className="noteTitle">
             {/* <input type="text" className="titleInput" colour = {colour} value={title} onChange={titleChange}/> */}
-            <div className="titleInput" colour = {colour} contentEditable="true" onFocus={setTitle} onBlur={titleChange} id={"titleInput"+props.id}></div>
+            <div className="titleInput Input" colour = {colour} contentEditable="true" spellCheck="false" onFocus={setTitle} onBlur={titleChange} id={"titleInput"+props.id}></div>
         </div>
         <div className="bar">
         </div>
         <div className="noteContent">
             {/* <textarea className="contentInput" colour = {colour} value={content} onChange={contentChange}/> */}
-            <div className="contentInput" colour = {colour} contentEditable="true" onFocus={setContent} onBlur={contentChange} id={"contentInput"+props.id}></div>
+            <div className="contentInput Input" colour = {colour} contentEditable="true" spellCheck="false" onFocus={setContent} onBlur={contentChange} id={"contentInput"+props.id}></div>
         </div>
     </div>
     );

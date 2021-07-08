@@ -49,28 +49,33 @@
   font-weight: 300;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 17px;
-  border: none;
-  border-bottom: solid 1px black;
   width: 70%;
   height: 70%;
+  overflow-y: hidden;
 }
-.titleInput[colour="0"] {
-  background-color: rgb(179, 190, 17);
+.titleInput.single-line {
+  white-space: nowrap;
+  width: 200px;
+  overflow: hidden;
 }
-.titleInput[colour="1"] {
-  background-color: rgb(40, 109, 236);
+.titleInput.single-line br {
+  display: none;
 }
-.titleInput[colour="2"] {
-  background-color: rgb(92, 184, 0);
+.titleInput.single-line * {
+  display: inline;
+  white-space: nowrap;
 }
-.titleInput[colour="3"] {
-  background-color: rgb(177, 0, 35);
+.titleInput::-webkit-scrollbar {
+  height: 2px;
 }
-.titleInput[colour="4"] {
-  background-color: rgb(126, 126, 126);
+.titleInput::-webkit-scrollbar-track {
+  background: #696969;
 }
-.titleInput:focus {
-  outline: none;
+.titleInput::-webkit-scrollbar-thumb {
+  background: rgb(0, 0, 0);
+}
+.titleInput::-webkit-scrollbar-thumb:hover {
+  background: rgb(75, 75, 75);
 }
 .noteContent {
   height: 80%;
@@ -83,34 +88,58 @@
   font-weight: 300;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 17px;
-  background-color: rgb(163, 122, 16);
-  border: none;
-  resize: none;
-  border-bottom: solid 1px black;
   width: 90%;
   height: 70%;
   padding: 5px;
   display: inline-block;
+  overflow-y: auto;
 }
-.contentInputPre {
-  white-space: pre-wrap;
-}
-.contentInput[colour="0"] {
+.Input[colour="0"] {
+  border: solid 1.5px rgb(231, 247, 17);
   background-color: rgb(179, 190, 17);
 }
-.contentInput[colour="1"] {
+.Input[colour="1"] {
+  border: solid 1.5px cornflowerblue;
   background-color: rgb(40, 109, 236);
 }
-.contentInput[colour="2"] {
+.Input[colour="2"] {
+  border: solid 1.5px chartreuse;
   background-color: rgb(92, 184, 0);
 }
-.contentInput[colour="3"] {
+.Input[colour="3"] {
+  border: solid 1.5px crimson;
   background-color: rgb(177, 0, 35);
 }
-.contentInput[colour="4"] {
-  background-color: rgb(126, 126, 126);
+.Input[colour="4"] {
+  border: solid 1.5px rgb(226, 226, 226);
+  background-color: rgb(163, 163, 163);
 }
-.contentInput:focus {
+.Input[colour="0"]:focus {
+  border: solid 1.5px rgb(0, 0, 0);
+  transition: border 0.5s;
+  background-color: rgb(179, 190, 17);
+}
+.Input[colour="1"]:focus {
+  border: solid 1.5px rgb(0, 0, 0);
+  transition: border 0.5s;
+  background-color: rgb(40, 109, 236);
+}
+.Input[colour="2"]:focus {
+  border: solid 1.5px rgb(0, 0, 0);
+  transition: border 0.5s;
+  background-color: rgb(92, 184, 0);
+}
+.Input[colour="3"]:focus {
+  border: solid 1.5px rgb(0, 0, 0);
+  transition: border 0.5s;
+  background-color: rgb(177, 0, 35);
+}
+.Input[colour="4"]:focus {
+  border: solid 1.5px rgb(0, 0, 0);
+  transition: border 0.5s;
+  background-color: rgb(163, 163, 163);
+}
+.Input:focus {
   outline: none;
 }
 .icons {

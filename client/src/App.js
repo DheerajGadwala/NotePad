@@ -4,9 +4,11 @@ import getWeb3 from "./getWeb3";
 import SearchBar from "./components/searchBar";
 import Notes from "./components/notes";
 import loadingGIF from "./images/loading.gif";
-
+import Firefox from "./images/firefox.png";
+import Chrome from "./images/chrome.png";
+import Appstore from "./images/appstore.png";
+import Playstore from "./images/playstore.png";
 import "./App.css";
-
 
  const App = ()=>{
 
@@ -16,7 +18,7 @@ import "./App.css";
 
     const [changes, setChanges] = useState(false);
     const [noChangesOnBlur, setNoChangesOnBlur] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [searchFilterData, setSearchFilterData] = useState("All");
     const [colorsFilterData, setColorsFilterData] = useState([true, true, true, true, true]);
@@ -25,7 +27,6 @@ import "./App.css";
 
     const setUp = async ()=>{
         try{
-            setLoading(true);
             let web3 = await getWeb3();
             let accounts = await web3.eth.getAccounts();
             let instance = new web3.eth.Contract(
@@ -39,16 +40,20 @@ import "./App.css";
 
         }
         catch (error) {
-            alert(
-              `Failed to load web3, accounts, or contract. Check console for details.`,
-            );
+            setLoading(true);
             console.error(error);
           }
     }
     useEffect(()=>{
-        window.ethereum.on('accountsChanged', function (accounts) {
-            setAccounts(accounts);
-        });
+        try{
+            window.ethereum.on('accountsChanged', function (accounts) {
+                setAccounts(accounts);
+            });
+        }
+        catch(error){
+            setLoading(true);
+            console.log('Metamask required');
+        }
     }, []);
     const getData = async ()=>{
         setLoading(true);
@@ -68,7 +73,32 @@ import "./App.css";
     return (
         <div className="notePadArea">
             <div className={loading?"loadingAnimationContainer visibility":"loadingAnimationContainer"}>
+                <div className="Intro">
+                    <div className="IntroTitle">
+                        NotePad
+                    </div>
+                    <div className="IntroBy">
+                        By Dheeraj Gadwala 
+                    </div>
+                </div>
                 <img src = {loadingGIF} className="loadingAnimation"/>
+                <div className={Accounts===null?"linksContainer visibility":"linksContainer"}>
+                    <div>This application requires MetaMask. Please install the Metamask appication/ extension using the links below to continue.</div>
+                        <div className="links">
+                        <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en">
+                            <img src={Chrome}/>
+                        </a>
+                        <a href="https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/">
+                            <img src={Firefox}/>
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=io.metamask&hl=en_IN&gl=US">
+                            <img src={Playstore}/>
+                        </a>
+                        <a href="https://apps.apple.com/us/app/metamask-blockchain-wallet/id1438144202">
+                            <img src={Appstore}/>
+                        </a>
+                    </div>
+                </div>
             </div>
             <SearchBar
                 data = {data}

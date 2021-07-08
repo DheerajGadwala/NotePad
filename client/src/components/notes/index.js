@@ -18,8 +18,8 @@ const Notes = (props)=>{
 
         let re, reCaps;
         if(props.searchData!==""){
-            re = new RegExp(checkSearchValue(props.searchData)+"+(?![^<]*>)+(?![^&]*b*s*p*;)", ""); //searchData but not in angular brackets
-            reCaps = new RegExp(checkSearchValue(props.searchData)+"+(?![^<]*>)+(?![^&]*b*s*p*;)", "i");
+            re = new RegExp(`(${checkSearchValue(props.searchData)})+(?![^<]*>)+(?![^&]*b*s*p*;)`, ""); //searchData but not in angular brackets
+            reCaps = new RegExp(`(${checkSearchValue(props.searchData)})+(?![^<]*>)+(?![^&]*b*s*p*;)`, "i");
         }
         
         while(i<props.data.length){            
