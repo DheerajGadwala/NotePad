@@ -27,27 +27,47 @@ import "./App.css";
     const [displayIDs, setDisplayIDs] = useState([]);
     const [saveFailed, setSaveFailed] = useState(false);
 
-    const setUp = async ()=>{
-        try{
-            let web3 = await getWeb3();
-            let accounts = await web3.eth.getAccounts();
-            let instance = new web3.eth.Contract(NotepadContract.abi, "0xb0f1390500973009582557f86aB9f1Fe612627AB",);
-            let chainId = await window.ethereum.request({ method: 'eth_chainId' });
-            setWeb3(web3);
-            setAccounts(accounts);
-            setContract(instance);
-            setChain(chainId);
-            setLoading(false);
+    useEffect(()=>{
+        (async()=>{
+            setWeb3(await getWeb3());
+        })();
+    }, []);
 
+    const setUp = async ()=>{
+        let accounts, instance, chainId;
+        try{
+            accounts = await Web3.eth.getAccounts();
+            chainId = await window.ethereum.request({ method: 'eth_chainId' });
+            instance = new Web3.eth.Contract(NotepadContract.abi, "0xb0f1390500973009582557f86aB9f1Fe612627AB");
         }
         catch (error) {
             setLoading(true);
-          }
+        }
+        try{
+            if(instance && accounts){
+                const response = await instance.methods.fetch(accounts[0]).call();
+                setData(response);
+            }
+        }
+        catch{
+            setData([]);
+        }
+        if(!Accounts || (accounts && accounts[0]!==Accounts[0])){
+            setAccounts(accounts);
+        }
+        if(!Chain || (chainId && chainId!==Chain)){
+            setChain(chainId);
+        }
+        if(!Contract || (Contract && instance._address!==Contract._address)){
+            setContract(instance);
+        }
+        setLoading(false);
     }
     useEffect(()=>{
         try{
-            window.ethereum.on('accountsChanged', function (accounts) {
+            window.ethereum.on('accountsChanged', async (accounts) => {
                 setAccounts(accounts);
+
             });
             window.ethereum.on('chainChanged', (network)=>{
                 setChain(network);              
@@ -58,58 +78,45 @@ import "./App.css";
             console.log('Metamask required');
         }
     }, []);
-    const getData = async ()=>{
-        setLoading(true);
-        try{
-            if(Contract && Accounts){
-                const response = await Contract.methods.fetch(Accounts[0]).call();
-                setData(response);
-            }
-            setLoading(false);
-        }
-        catch{
-            setData([]);
-        }
-    }
     useEffect(() => {
         setUp();
     }, [Web3, Accounts, Contract, Chain]);
-    useEffect(() =>{
-        getData();
-    }, [Contract, Accounts, Chain]);
+
 
     return (
         <div className="notePadArea">
-            <div className={(loading||Accounts===null||Chain!=="0x2a")?"loadingAnimationContainer visibility":"loadingAnimationContainer"}>
-                <div className="Intro">
-                    <div className="IntroTitle">
-                        NotePad
+            <div className={(loading||!Accounts||Chain!=="0x2a")?"loadingScreenContainer visibility":"loadingScreenContainer"}>
+                <div className="loadingAnimationContainer">
+                    <div className="Intro">
+                        <div className="IntroTitle">
+                            NotePad
+                        </div>
+                        <div className="IntroBy">
+                            By Dheeraj Gadwala 
+                        </div>
                     </div>
-                    <div className="IntroBy">
-                        By Dheeraj Gadwala 
-                    </div>
-                </div>
-                <img src = {loadingGIF} className="loadingAnimation"/>
-                <div className={(Accounts===null||Chain!=="0x2a")?"linksContainer visibility":"linksContainer"}>
-                    <div className={Accounts===null?"checker visibility":"checker"}>
-                        This application requires MetaMask. Please install the Metamask appication/ extension using the links below to continue.
-                    </div>
-                    <div className={Chain!=="0x2a"?"checker visibility":"checker"}>
-                        This Applications works only on the Kovan test network. Please change to the Kovan test net.
-                    </div>
-                    <div className={Accounts===null?"links visibility":"links"}>
-                        <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en">
-                            <img src={Chrome}/>
-                        </a>
-                        <a href="https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/">
-                            <img src={Firefox}/>
-                        </a>
-                        <a href="https://play.google.com/store/apps/details?id=io.metamask&hl=en_IN&gl=US">
-                            <img src={Playstore}/>
-                        </a>
-                        <a href="https://apps.apple.com/us/app/metamask-blockchain-wallet/id1438144202">
-                            <img src={Appstore}/>
-                        </a>
+                    <img src = {loadingGIF} className="loadingAnimation"/>
+                    <div className={(!Accounts||Chain!=="0x2a")?"linksContainer visibility":"linksContainer"}>
+                        <div className={!Accounts?"checker visibility":"checker"}>
+                            This application requires MetaMask. Please install the Metamask appication/ extension using the links below to continue.
+                        </div>
+                        <div className={Chain!=="0x2a"?"checker visibility":"checker"}>
+                            This Applications works only on the Kovan test network. Please change to the Kovan test net.
+                        </div>
+                        <div className={!Accounts?"links visibility":"links"}>
+                            <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en">
+                                <img src={Chrome}/>
+                            </a>
+                            <a href="https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/">
+                                <img src={Firefox}/>
+                            </a>
+                            <a href="https://play.google.com/store/apps/details?id=io.metamask&hl=en_IN&gl=US">
+                                <img src={Playstore}/>
+                            </a>
+                            <a href="https://apps.apple.com/us/app/metamask-blockchain-wallet/id1438144202">
+                                <img src={Appstore}/>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
