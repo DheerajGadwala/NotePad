@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c8e2d4bdc443edfc1751ab5af86564fa",
+    "revision": "745a840f732b5ce9b3132e3fbf15b586",
     "url": "/NotePad/index.html"
   },
   {
-    "revision": "745639c6a80de05c0bc6",
-    "url": "/NotePad/static/css/main.b28d7d38.chunk.css"
+    "revision": "5d17ea6fc824f7baca04",
+    "url": "/NotePad/static/css/main.4b6f05c8.chunk.css"
   },
   {
     "revision": "edabb48924dbd6033005",
     "url": "/NotePad/static/js/2.d10f0da7.chunk.js"
   },
   {
-    "revision": "745639c6a80de05c0bc6",
-    "url": "/NotePad/static/js/main.2b4eb21a.chunk.js"
+    "revision": "5d17ea6fc824f7baca04",
+    "url": "/NotePad/static/js/main.bf6ec070.chunk.js"
   },
   {
     "revision": "47d85bdce6c1b66d350f",
