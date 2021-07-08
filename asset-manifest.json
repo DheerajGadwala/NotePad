@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/NotePad/static/css/main.a00aed51.chunk.css",
+    "main.css": "/NotePad/static/css/main.73012bc2.chunk.css",
     "main.js": "/NotePad/static/js/main.2b4eb21a.chunk.js",
     "main.js.map": "/NotePad/static/js/main.2b4eb21a.chunk.js.map",
     "runtime-main.js": "/NotePad/static/js/runtime-main.efef31ee.js",
@@ -8,16 +8,16 @@
     "static/js/2.d10f0da7.chunk.js": "/NotePad/static/js/2.d10f0da7.chunk.js",
     "static/js/2.d10f0da7.chunk.js.map": "/NotePad/static/js/2.d10f0da7.chunk.js.map",
     "index.html": "/NotePad/index.html",
-    "precache-manifest.223b97f602a8c631b374bac6c2bc10de.js": "/NotePad/precache-manifest.223b97f602a8c631b374bac6c2bc10de.js",
+    "precache-manifest.e8b9218dad08b4acb7e7434a848b1e19.js": "/NotePad/precache-manifest.e8b9218dad08b4acb7e7434a848b1e19.js",
     "service-worker.js": "/NotePad/service-worker.js",
-    "static/css/main.a00aed51.chunk.css.map": "/NotePad/static/css/main.a00aed51.chunk.css.map",
+    "static/css/main.73012bc2.chunk.css.map": "/NotePad/static/css/main.73012bc2.chunk.css.map",
     "static/media/firefox.png": "/NotePad/static/media/firefox.9b5ba3a0.png",
     "static/media/loading.gif": "/NotePad/static/media/loading.08ead3be.gif"
   },
   "entrypoints": [
     "static/js/runtime-main.efef31ee.js",
     "static/js/2.d10f0da7.chunk.js",
-    "static/css/main.a00aed51.chunk.css",
+    "static/css/main.73012bc2.chunk.css",
     "static/js/main.2b4eb21a.chunk.js"
   ]
 }
