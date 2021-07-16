@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/NotePad/static/css/main.1220c719.chunk.css",
-    "main.js": "/NotePad/static/js/main.964353b3.chunk.js",
-    "main.js.map": "/NotePad/static/js/main.964353b3.chunk.js.map",
-    "runtime-main.js": "/NotePad/static/js/runtime-main.efef31ee.js",
-    "runtime-main.js.map": "/NotePad/static/js/runtime-main.efef31ee.js.map",
-    "static/js/2.d10f0da7.chunk.js": "/NotePad/static/js/2.d10f0da7.chunk.js",
-    "static/js/2.d10f0da7.chunk.js.map": "/NotePad/static/js/2.d10f0da7.chunk.js.map",
-    "index.html": "/NotePad/index.html",
-    "precache-manifest.d815d850efc26db84d8757b37510db85.js": "/NotePad/precache-manifest.d815d850efc26db84d8757b37510db85.js",
-    "service-worker.js": "/NotePad/service-worker.js",
-    "static/css/main.1220c719.chunk.css.map": "/NotePad/static/css/main.1220c719.chunk.css.map",
-    "static/media/firefox.png": "/NotePad/static/media/firefox.9b5ba3a0.png",
-    "static/media/loading.gif": "/NotePad/static/media/loading.08ead3be.gif"
+    "main.css": "/Notepad_DAPP/static/css/main.1220c719.chunk.css",
+    "main.js": "/Notepad_DAPP/static/js/main.50484291.chunk.js",
+    "main.js.map": "/Notepad_DAPP/static/js/main.50484291.chunk.js.map",
+    "runtime-main.js": "/Notepad_DAPP/static/js/runtime-main.f249bb0b.js",
+    "runtime-main.js.map": "/Notepad_DAPP/static/js/runtime-main.f249bb0b.js.map",
+    "static/js/2.d10f0da7.chunk.js": "/Notepad_DAPP/static/js/2.d10f0da7.chunk.js",
+    "static/js/2.d10f0da7.chunk.js.map": "/Notepad_DAPP/static/js/2.d10f0da7.chunk.js.map",
+    "index.html": "/Notepad_DAPP/index.html",
+    "precache-manifest.43e02573ae049ffccf557d731239d62d.js": "/Notepad_DAPP/precache-manifest.43e02573ae049ffccf557d731239d62d.js",
+    "service-worker.js": "/Notepad_DAPP/service-worker.js",
+    "static/css/main.1220c719.chunk.css.map": "/Notepad_DAPP/static/css/main.1220c719.chunk.css.map",
+    "static/media/firefox.png": "/Notepad_DAPP/static/media/firefox.9b5ba3a0.png",
+    "static/media/loading.gif": "/Notepad_DAPP/static/media/loading.08ead3be.gif"
   },
   "entrypoints": [
-    "static/js/runtime-main.efef31ee.js",
+    "static/js/runtime-main.f249bb0b.js",
     "static/js/2.d10f0da7.chunk.js",
     "static/css/main.1220c719.chunk.css",
-    "static/js/main.964353b3.chunk.js"
+    "static/js/main.50484291.chunk.js"
   ]
 }
